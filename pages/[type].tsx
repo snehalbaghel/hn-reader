@@ -20,7 +20,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-const PAGE_SIZE = 20
+const PAGE_SIZE = 14
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
@@ -63,12 +63,9 @@ const MainPage: NextPage<{ pageType?: string }> = ({ pageType }) => {
           )) ?? null,
         enabled: Number.isInteger(itemId),
         cacheTime: 600000 + Math.random() * 6000 * 2,
+        refetchOnWindowFocus: false
       })) ?? []
   )
-
-  console.log({ isLastPage, isFirstPage });
-  
-  
 
   return (
     <>
@@ -140,17 +137,6 @@ const MainPage: NextPage<{ pageType?: string }> = ({ pageType }) => {
                   Next
                 </button>
               </div>
-              {/* Right column */}
-              {/* <div className="grid grid-cols-1 gap-4">
-                <section aria-labelledby="section-2-title">
-                  <h2 className="sr-only" id="section-2-title">
-                    Section title
-                  </h2>
-                  <div className="overflow-hidden rounded-lg bg-white shadow">
-                    <div className="p-6"></div>
-                  </div>
-                </section>
-              </div> */}
             </div>
           </div>
         </main>
