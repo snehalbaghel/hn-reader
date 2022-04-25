@@ -4,6 +4,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import fromUnixTime from 'date-fns/fromUnixTime'
 import { HN_ITEM_URL, HN_USER_URL } from '../constants'
 import { getFaviconURL } from '../utils'
+import Image from 'next/image'
 
 export interface ListProps {
   items: Item[]
@@ -61,7 +62,7 @@ export const ArticleList: React.FC<ListProps> = ({ items }) => {
                   <div className="order-3">
                     { hostname ? 
                       <span className='mr-1'>
-                        <img className="inline" src={getFaviconURL(url ?? '')} />
+                        <Image placeholder='empty' className="inline" src={getFaviconURL(url ?? '')} height="16" width="16" />
                         <span className="ml-1 text-sm italic">{hostname}</span>
                       </span>
                       : null
