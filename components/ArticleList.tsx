@@ -62,7 +62,7 @@ export const ArticleList: React.FC<ListProps> = ({ items }) => {
                   <div className="order-3">
                     { hostname ? 
                       <span className='mr-1 inline-flex items-center'>
-                        <Image className='rounded-sm' placeholder='blur' blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMUEGDZBAABNADYOc97sAAAAABJRU5ErkJggg==' src={getFaviconURL(url ?? '')} height="16" width="16" />
+                        <Image alt="favicon" className='rounded-sm' placeholder='blur' blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMUEGDZBAABNADYOc97sAAAAABJRU5ErkJggg==' src={getFaviconURL(url ?? '')} height="16" width="16" />
                         <span className="ml-1 text-sm italic">{hostname}</span>
                       </span>
                       : null
