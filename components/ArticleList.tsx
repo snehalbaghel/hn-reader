@@ -53,7 +53,7 @@ export const ArticleList: React.FC<ListProps> = ({ items }) => {
                   aria-label='open article'
                   className="group-hover:underline focus:outline-none"
                 >
-                  <p className="truncate text-sm font-medium text-gray-900">
+                  <p className="text-sm line-clamp-2 text-left font-medium text-gray-900">
                     {item.title}
                   </p>
                 </button>
@@ -97,7 +97,7 @@ export const ArticleList: React.FC<ListProps> = ({ items }) => {
             </div>
             {item.text ? (
               <div className="mt-1">
-                <div className="line-clamp-2 m-2 rounded-md p-3 text-sm text-gray-600 ring-2 ring-stone-200">
+                <div className="m-2 rounded-md p-3 text-sm text-gray-600 ring-2 ring-stone-200">
                   {/* TODO: Sanitize this html with xss */}
                   <div dangerouslySetInnerHTML={{ __html: item.text ?? '' }} />
                 </div>

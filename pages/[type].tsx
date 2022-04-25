@@ -69,7 +69,7 @@ const MainPage: NextPage<{ pageType?: string }> = ({ pageType }) => {
 
   return (
     <>
-      <div className="min-h-full">
+      <div className="min-h-full w-full">
         <header className="bg-orange-600 pb-24">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
             <div className="py-5">
