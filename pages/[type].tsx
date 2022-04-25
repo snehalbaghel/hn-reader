@@ -73,9 +73,8 @@ const MainPage: NextPage<{ pageType?: string }> = ({ pageType }) => {
         <header className="bg-orange-600 pb-24">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
             <div className="py-5">
-              <div className="grid grid-cols-3 items-center gap-8">
                 <div className="col-span-2">
-                  <nav className="flex items-center space-x-4">
+                  <nav className="flex items-center space-x-4 flex-wrap gap-1">
                     <HNIcon className="h-9 w-9" />
                     {navigation.map((item) => (
                       <a
@@ -94,7 +93,6 @@ const MainPage: NextPage<{ pageType?: string }> = ({ pageType }) => {
                     ))}
                   </nav>
                 </div>
-              </div>
             </div>
           </div>
         </header>
