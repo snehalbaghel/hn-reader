@@ -21,7 +21,7 @@ export const dummyStorageApi = {
    },
  })
  
- const localStoragePersistor = createWebStoragePersistor({storage: typeof window === 'undefined' ? dummyStorageApi : window.localStorage })
+ const localStoragePersistor = createWebStoragePersistor({storage: typeof window === 'undefined' ? dummyStorageApi : window.sessionStorage })
  
  persistQueryClient({ 
    queryClient,
