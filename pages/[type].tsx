@@ -23,14 +23,19 @@ function classNames(...classes: string[]) {
 const PAGE_SIZE = 14
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const pageType = context.query.type
+  const allItems = await axios.get<number[]>(HN_API_ENDPOINT + `${pageType}.json`)
+  const initialData = allItems.data
+
   return {
     props: {
-      pageType: context.query.type
+      pageType,
+      allItems: initialData
     }, // will be passed to the page component as props
   }
 }
 
-const MainPage: NextPage<{ pageType?: string }> = ({ pageType }) => {
+const MainPage: NextPage<{ pageType?: string, allItems: number[] }> = ({ pageType, allItems: allItemsInitial }) => {
   const { query, push } = useRouter()
   const queryObj = (query as { page?: string, type?: string })
   
@@ -39,22 +44,22 @@ const MainPage: NextPage<{ pageType?: string }> = ({ pageType }) => {
   const { data: allItemIds } = useQuery(
     pageType ?? '',
     async ({ signal }) =>
-      await axios.get<number[]>(HN_API_ENDPOINT + `${pageType}.json`, {
+      (await axios.get<number[]>(HN_API_ENDPOINT + `${pageType}.json`, {
         signal,
-      }),
-    { cacheTime: 600000, refetchOnWindowFocus: false, enabled: !!pageType }
+      })).data,
+    { cacheTime: 600000, refetchOnWindowFocus: false, enabled: !!pageType, initialData: allItemsInitial  }
   )
 
   const isFirstPage = useMemo(() => page === 1, [page])
   const [isLastPage, setIsLastPage] = useState(false)
 
   useEffect(() => {
-    setIsLastPage(page + 1 > (allItemIds?.data.length ?? 1) / PAGE_SIZE)
-  }, [allItemIds?.data.length, page])
+    setIsLastPage(page + 1 > (allItemIds?.length ?? 1) / PAGE_SIZE)
+  }, [allItemIds?.length, page])
 
   const queries = useQueries(
-    allItemIds?.data
-      .slice((PAGE_SIZE * (page -1)), PAGE_SIZE * page)
+    allItemIds
+      ?.slice((PAGE_SIZE * (page -1)), PAGE_SIZE * page)
       .map((itemId) => ({
         queryKey: ['item', itemId],
         queryFn: async () =>
@@ -118,7 +123,6 @@ const MainPage: NextPage<{ pageType?: string }> = ({ pageType }) => {
               </div>
               <div className="flex flex-1 justify-between sm:justify-end">
                 <button
-                
                   disabled={isFirstPage}
                   className={`relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 
                 ${isFirstPage ? 'bg-gray-50 text-gray-300' : ''}`}

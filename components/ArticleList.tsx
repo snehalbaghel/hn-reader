@@ -44,20 +44,20 @@ export const ArticleList: React.FC<ListProps> = ({ items }) => {
         return (
           <li
             key={item.id}
-            className="group cursor-pointer relative rounded-lg bg-white py-5 px-4 focus-within:ring-2 focus-within:ring-inset focus-within:ring-orange-600 hover:bg-gray-50"
-            onClick={() => window.open(url, '_blank')}
+            className="group cursor-pointer relative rounded-lg bg-white py-3 px-2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-orange-600 hover:bg-gray-50"
           >
             <div className="flex flex-col justify-between space-y-1 md:flex-row md:space-x-3">
               <div className="hidden self-center md:block">{upvotes}</div>
               <div className="order-2 min-w-0 flex-1">
-                <button
+                <a
                   aria-label='open article'
-                  className="group-hover:underline focus:outline-none"
+                  className="group-hover:underline focus:outline-none text-gray-900 visited:text-purple-900"
+                  href={url}
                 >
-                  <p className="text-sm line-clamp-2 text-left font-medium text-gray-900">
+                  <p className="text-sm line-clamp-2 text-left font-medium">
                     {item.title}
                   </p>
-                </button>
+                </a>
                 {hostname ? (
                   <div className="order-3">
                     { hostname ? 
